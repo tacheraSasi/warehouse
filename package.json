@@ -1,10 +1,10 @@
 {
-  "name": "next-shadcn-dashboard-starter",
+  "name": "warehouse",
   "version": "1.0.0",
   "private": true,
   "author": {
-    "name": "Kiran",
-    "url": "https://github.com/Kiranism"
+    "name": "Tachera W sasi",
+    "url": "https://github.com/tacheraSasi"
   },
   "scripts": {
     "dev": "next dev --turbo",
@@ -28,6 +28,7 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^3.3.2",
+    "@prisma/client": "^6.2.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -70,6 +71,7 @@
     "nextjs-toploader": "^1.6.12",
     "nuqs": "^2.2.3",
     "postcss": "8.4.28",
+    "prisma": "^6.2.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.9.1",
     "react-dom": "^18.2.0",
