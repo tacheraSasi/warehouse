@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: pageProps) {
     <PageContainer>
       <div className='space-y-4'>
         <div className='flex items-start justify-between'>
-          <Heading
+          <Heading   
             title='Products'
             description='Manage products (Server side table functionalities.)'
           />
