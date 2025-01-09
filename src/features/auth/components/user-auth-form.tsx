@@ -44,7 +44,7 @@ export default function UserAuthForm() {
       });
       toast.success('Signed In Successfully!');
     });
-  };
+  };  
 
   return (
     <>
