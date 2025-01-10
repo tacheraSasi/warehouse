@@ -101,8 +101,9 @@ export default function AppSidebar() {
                             <SidebarMenuSubButton
                               asChild
                               isActive={pathname === subItem.url}
+                              onClick={()=>signOut()}
                             >
-                              <Link href={subItem.url}>
+                              <Link href={subItem.title != "SignOut"?subItem.url:"#"}>
                                 <span>{subItem.title}</span>
                               </Link>
                             </SidebarMenuSubButton>

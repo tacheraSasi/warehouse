@@ -43,7 +43,7 @@ export const navItems: NavItem[] = [
         shortcut: ['m', 'm']
       },
       {
-        title: 'Login',
+        title: 'SignOut',
         shortcut: ['l', 'l'],
         url: '/',
         icon: 'login'

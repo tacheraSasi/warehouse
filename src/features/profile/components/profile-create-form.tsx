@@ -31,6 +31,7 @@ import { AlertTriangleIcon, Trash, Trash2Icon } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { useSession } from "next-auth/react"
 
 interface ProfileFormType {
   initialData: any | null;
@@ -55,6 +56,8 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [data, setData] = useState({});
   const delta = currentStep - previousStep;
+
+  const {data:session} = useSession()
 
   const defaultValues = {
     jobs: [
@@ -250,7 +253,7 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
                       <FormControl>
                         <Input
                           disabled={loading}
-                          placeholder='John'
+                          placeholder='firstname'
                           {...field}
                         />
                       </FormControl>
@@ -267,7 +270,7 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
                       <FormControl>
                         <Input
                           disabled={loading}
-                          placeholder='Doe'
+                          placeholder='lastname'
                           {...field}
                         />
                       </FormControl>
@@ -284,7 +287,7 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
                       <FormControl>
                         <Input
                           disabled={loading}
-                          placeholder='johndoe@gmail.com'
+                          placeholder='email'
                           {...field}
                         />
                       </FormControl>
