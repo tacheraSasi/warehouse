@@ -25,7 +25,9 @@ const authConfig = {
             email:credentials?.email as string
           }
         })
+        console.log(user)
         const isPassCorrect:boolean = await comparePassword(credentials?.password as string,user.password)
+        console.log(isPassCorrect)
 
         if (user && isPassCorrect) {
           console.log(user)
