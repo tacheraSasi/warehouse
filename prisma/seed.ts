@@ -1,13 +1,17 @@
-import prisma from "./client"
+import { hashPassword } from "@/lib/utils";
+import prisma from "./client";
 import { faker } from "@faker-js/faker";
 
-async function main() {
+export default async function main() {
+  // Hash the password
+  const password = await hashPassword("password");
+
   // Seed admin
   await prisma.admins.create({
     data: {
       name: "Ekilie",
       email: "support@ekilie.com",
-      password: "securepassword123", // Will Use a hashed password in production
+      password: password,
     },
   });
 
@@ -16,9 +20,9 @@ async function main() {
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     category: faker.commerce.department(),
-    price: parseFloat(faker.commerce.price({ min: 5, max: 500, dec: 2 })),
+    price: parseFloat(faker.commerce.price({ min: 5, max: 500 })),
     photoUrl: `https://api.slingacademy.com/public/sample-products/${index + 1}.png`,
-    createdAt: faker.date.between({ from: '2022-01-01', to: '2023-12-31' }),
+    createdAt: faker.date.between({from:"2022-01-01", to:"2025-12-31"}),
     updatedAt: faker.date.recent(),
   }));
 
@@ -29,8 +33,8 @@ async function main() {
   // Seed inventory
   const inventoryData = products.map((_, index) => ({
     productId: index + 1,
-    quantity: faker.datatype.number({ min: 10, max: 100 }),
-    location: faker.address.cityName(),
+    quantity: faker.number.int({ min: 10, max: 100 }),
+    location: faker.location.city(),
   }));
 
   await prisma.inventory.createMany({
@@ -39,10 +43,10 @@ async function main() {
 
   // Seed customers
   const customers = Array.from({ length: 10 }, () => ({
-    name: faker.name.fullName(),
+    name: faker.person.fullName(),
     email: faker.internet.email(),
     phone: faker.phone.number(),
-    address: faker.address.streetAddress(),
+    address: faker.location.streetAddress(),
   }));
 
   await prisma.customers.createMany({

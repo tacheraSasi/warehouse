@@ -28,7 +28,7 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^3.3.2",
-    "@prisma/client": "^6.2.0",
+    "@prisma/client": "^6.2.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -55,6 +55,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^1.0.0",
@@ -71,7 +72,6 @@
     "nextjs-toploader": "^1.6.12",
     "nuqs": "^2.2.3",
     "postcss": "8.4.28",
-    "prisma": "^6.2.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.9.1",
     "react-dom": "^18.2.0",
@@ -92,13 +92,15 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
+    "@types/bcryptjs": "^2.4.6",
     "@types/sort-by": "^1.2.3",
     "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "prisma": "^6.2.1"
   },
   "packageManager": "pnpm@9.15.0+sha1.8bfdb6d72b4d5fdf87d21d27f2bfbe2b21dd2629"
 }

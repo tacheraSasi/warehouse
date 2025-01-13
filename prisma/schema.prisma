@@ -17,60 +17,63 @@ model Admins {
 }
 
 model Products {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   name        String
   description String
   category    String
   price       Float
   photoUrl    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  inventory   Inventory[]  @relation("ProductInventory")
+  orderItems  OrderItems[] @relation("ProductOrderItems")
 }
 
 model Inventory {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   productId Int
   quantity  Int
   location  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  // product Product @relation(fields: [productId], references: [id])
+  product   Products  @relation("ProductInventory", fields: [productId], references: [id])
 }
 
 model Orders {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   customerId  Int
   totalAmount Float
-  status      String   @default("Pending")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  status      String       @default("Pending")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
-  // orderItems OrderItem[]
+  customer    Customers    @relation(fields: [customerId], references: [id])
+  orderItems  OrderItems[]
 }
 
 model OrderItems {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   orderId   Int
   productId Int
   quantity  Int
   price     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  // order   Orders   @relation(fields: [orderId], references: [id])
-  // product Product @relation(fields: [productId], references: [id])
+  order     Orders    @relation(fields: [orderId], references: [id])
+  product   Products  @relation("ProductOrderItems", fields: [productId], references: [id])
 }
 
-// Customer model
 model Customers {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  email     String   @unique
-  phone     String   @unique
+  email     String    @unique
+  phone     String    @unique
   address   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  // orders Order[]
+  orders    Orders[]
 }
