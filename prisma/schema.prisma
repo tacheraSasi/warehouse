@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
+model Admins {
   id        String   @id @default(cuid())
   name      String   @unique
   email     String   @unique
@@ -16,7 +16,7 @@ model Admin {
   updatedAt DateTime @updatedAt
 }
 
-model Product {
+model Products {
   id          Int      @id @default(autoincrement())
   name        String
   description String
@@ -35,10 +35,10 @@ model Inventory {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  product Product @relation(fields: [productId], references: [id])
+  // product Product @relation(fields: [productId], references: [id])
 }
 
-model Order {
+model Orders {
   id          Int      @id @default(autoincrement())
   customerId  Int
   totalAmount Float
@@ -46,10 +46,10 @@ model Order {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  orderItems OrderItem[]
+  // orderItems OrderItem[]
 }
 
-model OrderItem {
+model OrderItems {
   id        Int      @id @default(autoincrement())
   orderId   Int
   productId Int
@@ -58,12 +58,12 @@ model OrderItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  order   Order   @relation(fields: [orderId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
+  // order   Orders   @relation(fields: [orderId], references: [id])
+  // product Product @relation(fields: [productId], references: [id])
 }
 
 // Customer model
-model Customer {
+model Customers {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
@@ -72,5 +72,5 @@ model Customer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  orders Order[]
+  // orders Order[]
 }

@@ -3,10 +3,10 @@ import { faker } from "@faker-js/faker";
 
 async function main() {
   // Seed admin
-  await prisma.admin.create({
+  await prisma.admins.create({
     data: {
-      name: "Admin User",
-      email: "admin@example.com",
+      name: "Ekilie",
+      email: "support@ekilie.com",
       password: "securepassword123", // Will Use a hashed password in production
     },
   });
@@ -22,7 +22,7 @@ async function main() {
     updatedAt: faker.date.recent(),
   }));
 
-  await prisma.product.createMany({
+  await prisma.products.createMany({
     data: products,
   });
 
@@ -45,7 +45,7 @@ async function main() {
     address: faker.address.streetAddress(),
   }));
 
-  await prisma.customer.createMany({
+  await prisma.customers.createMany({
     data: customers,
   });
 

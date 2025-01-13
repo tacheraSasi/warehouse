@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import bcrypt from "bcryptjs";
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,3 +24,21 @@ export function formatBytes(
     sizeType === 'accurate' ? accurateSizes[i] ?? 'Bytest' : sizes[i] ?? 'Bytes'
   }`;
 }
+
+export const hashPassword = async (password: string): Promise<string> => {
+  const saltRounds = 10; 
+  return await bcrypt.hash(password, saltRounds);
+};
+
+/**
+ * Compares a plain-text password with a hashed password.
+ * @param password - The plain-text password.
+ * @param hashedPassword - The hashed password to compare against.
+ * @returns True if the passwords match, false otherwise.
+ */
+export const comparePassword = async (
+  password: string,
+  hashedPassword: string
+): Promise<boolean> => {
+  return await bcrypt.compare(password, hashedPassword);
+};
