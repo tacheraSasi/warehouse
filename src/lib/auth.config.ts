@@ -2,6 +2,7 @@ import { NextAuthConfig } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import prisma from 'prisma/client';
+import { comparePassword } from './utils';
 
 const authConfig = {
   providers: [
@@ -19,13 +20,15 @@ const authConfig = {
         }
       },
       async authorize(credentials, req) {
-        const user = await prisma.admin.findFirst({
+        const user = await prisma.Admins.findFirst({
           where:{
             email:credentials?.email as string
           }
         })
-        console.log(user)
-        if (user) {
+        const isPassCorrect:boolean = await comparePassword(credentials?.password as string,user.password)
+
+        if (user && isPassCorrect) {
+          console.log(user)
           return user;
         } else {
           return null;

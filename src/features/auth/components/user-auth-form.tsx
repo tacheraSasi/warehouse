@@ -1,4 +1,5 @@
 'use client';
+
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -18,33 +19,46 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 import GithubSignInButton from './github-auth-button';
 
+// Define schema
 const formSchema = z.object({
-  email: z.string().email({ message: 'Enter a valid email address' })
+  email: z.string().email({ message: 'Enter a valid email address' }),
+  password: z.string()
 });
 
 type UserFormValue = z.infer<typeof formSchema>;
 
 export default function UserAuthForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl');
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/dashboard';
   const [loading, startTransition] = useTransition();
-  const defaultValues = {
-    email: 'support@ekilie.com'
-  };
+
   const form = useForm<UserFormValue>({
     resolver: zodResolver(formSchema),
-    defaultValues
+    defaultValues: {
+      email: 'support@ekilie.com',
+      password: ''
+    }
   });
 
   const onSubmit = async (data: UserFormValue) => {
-    startTransition(() => {
-      signIn('credentials', {
-        email: data.email,
-        callbackUrl: callbackUrl ?? '/dashboard'
-      });
-      toast.success('Signed In Successfully!');
+    startTransition(async () => {
+      try {
+        const result = await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          callbackUrl
+        });
+
+        if (result != null) {
+          toast.success('Signed In Successfully!');
+        } else {
+          toast.error('Invalid email or password.');
+        }
+      } catch (error) {
+        toast.error('Something went wrong.');
+      }
     });
-  };  
+  };
 
   return (
     <>
@@ -63,6 +77,24 @@ export default function UserAuthForm() {
                   <Input
                     type='email'
                     placeholder='Enter your email...'
+                    disabled={loading}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='password'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type='password'
+                    placeholder='Enter your password...'
                     disabled={loading}
                     {...field}
                   />
