@@ -3,7 +3,7 @@ import prisma from "./client";
 import { faker } from "@faker-js/faker";
 
 export default async function main() {
-  // Hash the password
+  
   const password = await hashPassword("password");
 
   // Seed admin
