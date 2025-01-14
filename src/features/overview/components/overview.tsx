@@ -13,8 +13,10 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import prisma from 'prisma/client';
 
-export default function OverViewPage() {
+export default async function OverViewPage() {
+  const totalProducts = await prisma.products.count()
   return (
     <PageContainer scrollable>
       <div className='space-y-2'>
@@ -39,7 +41,7 @@ export default function OverViewPage() {
               <Card>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='text-sm font-medium'>
-                    Total Stock
+                    Total Products
                   </CardTitle>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -56,7 +58,7 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>12,345</div>
+                  <div className='text-2xl font-bold'>{totalProducts}</div>
                   <p className='text-xs text-muted-foreground'>
                     +5% restocked this month
                   </p>
