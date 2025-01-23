@@ -25,11 +25,7 @@ export default async function ProductListingPage({}: ProductListingPage) {
   // const products: Product[] = data.products;
   
   const dataFromDb = await prisma.products.findMany()
-  let categoriesArray = []
-  dataFromDb.forEach(data=>{
-    data.category && categoriesArray.push(data.category)
-  })
-  await prisma.categories.createMany(categoriesArray)
+  
   const products = dataFromDb
   const totalProducts = await prisma.products.count()
 

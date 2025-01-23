@@ -49,6 +49,7 @@ export default function UserAuthForm() {
           callbackUrl
         });
 
+        console.log("The result: ",result)
         if (result != null) {
           toast.success('Signed In Successfully!');
         } else {
