@@ -83,7 +83,7 @@ export default async function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>+1,45</div>
+                  <div className='text-2xl font-bold'>+145</div>
                   <p className='text-xs text-muted-foreground'>
                     +15% from last month
                   </p>
@@ -107,7 +107,7 @@ export default async function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>+8,23</div>
+                  <div className='text-2xl font-bold'>+823</div>
                   <p className='text-xs text-muted-foreground'>
                     +10% from last month
                   </p>
