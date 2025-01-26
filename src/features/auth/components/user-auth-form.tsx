@@ -50,10 +50,10 @@ export default function UserAuthForm() {
         });
 
         console.log("The result: ",result)
-        if (result != null) {
-          toast.success('Signed In Successfully!');
-        } else {
+        if (result == null) {
           toast.error('Invalid email or password.');
+        } else {
+          toast.success('Signed In Successfully!');
         }
       } catch (error) {
         toast.error('Something went wrong.');

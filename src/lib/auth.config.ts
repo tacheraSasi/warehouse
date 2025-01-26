@@ -1,15 +1,10 @@
 import { NextAuthConfig } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-import GithubProvider from 'next-auth/providers/github';
 import prisma from 'prisma/client';
 import { comparePassword } from './utils';
 
 const authConfig = {
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? '',
-      clientSecret: process.env.GITHUB_SECRET ?? ''
-    }),
     CredentialProvider({
       credentials: {
         email: {
@@ -20,7 +15,7 @@ const authConfig = {
         }
       },
       async authorize(credentials, req) {
-        const user = await prisma.Admins.findFirst({
+        const user = await prisma.admins.findFirst({
           where:{
             email:credentials?.email as string
           }
