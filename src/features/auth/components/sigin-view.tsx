@@ -41,7 +41,8 @@ export default function SignInViewPage() {
         <div className='relative z-20 mt-auto'>
           <blockquote className='space-y-2'>
             <p className='text-lg'>
-              &ldquo;Managing warehouse inventory has never been this easy and efficient.&rdquo;
+              &ldquo;Managing warehouse inventory has never been this easy and
+              efficient.&rdquo;
             </p>
             <footer className='text-sm'>Tachera Sasi</footer>
           </blockquote>

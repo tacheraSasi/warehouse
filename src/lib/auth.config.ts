@@ -16,16 +16,19 @@ const authConfig = {
       },
       async authorize(credentials, req) {
         const user = await prisma.admins.findFirst({
-          where:{
-            email:credentials?.email as string
+          where: {
+            email: credentials?.email as string
           }
-        })
-        console.log(user)
-        const isPassCorrect:boolean = await comparePassword(credentials?.password as string,user.password)
-        console.log(isPassCorrect)
+        });
+        console.log(user);
+        const isPassCorrect: boolean = await comparePassword(
+          credentials?.password as string,
+          user.password
+        );
+        console.log(isPassCorrect);
 
         if (user && isPassCorrect) {
-          console.log(user)
+          console.log(user);
           return user;
         } else {
           return null;
