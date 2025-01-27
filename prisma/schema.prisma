@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status{
+Pending
+Delivered
+}
+
 model Admins {
   id        String   @id @default(cuid())
   name      String   @unique
@@ -20,12 +25,12 @@ model Products {
   id          Int          @id @default(autoincrement())
   name        String
   description String
-  category    String
+  category    Int
   price       Float
   photoUrl    String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-
+  categories    Categories @relation(fields: [category],references: [id])
   inventory   Inventory[]  @relation("ProductInventory")
   orderItems  OrderItems[] @relation("ProductOrderItems")
 }
@@ -35,6 +40,7 @@ model Categories {
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  products Products[]
 }
 
 model Inventory {
@@ -52,7 +58,7 @@ model Orders {
   id          Int          @id @default(autoincrement())
   customerId  Int
   totalAmount Float
-  status      String       @default("Pending")
+  status      Status       @default(Pending)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 
