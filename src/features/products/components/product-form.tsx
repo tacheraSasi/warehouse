@@ -88,7 +88,7 @@ export default function ProductForm({
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-            <FormField
+            {/* <FormField
               control={form.control}
               name='image'
               render={({ field }) => (
@@ -112,7 +112,7 @@ export default function ProductForm({
                   </FormItem>
                 </div>
               )}
-            />
+            /> */}
 
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
               <FormField
