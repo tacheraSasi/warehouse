@@ -73,8 +73,13 @@ export default async function main() {
 
   const shipments = customers.map((customer) => ({
     customer_name: customer.name,
-    customer_email: customer.email
+    customer_email: customer.email,
+    product_name: faker.commerce.productName()
   }));
+
+  await prisma.shipments.createMany({
+    data: shipments
+  });
 
   console.log('Seeding completed!');
 }
