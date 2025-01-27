@@ -22,10 +22,9 @@ model Admins {
 }
 
 model Products {
-  id          Int          @id @default(autoincrement())
-  name        String
+  id String @id @default(cuid())
   description String
-  category    Int
+  category    String
   price       Float
   photoUrl    String
   createdAt   DateTime     @default(now())
@@ -36,7 +35,7 @@ model Products {
 }
 
 model Categories {
-  id        Int       @id @default(autoincrement())
+id String @id @default(cuid())
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -44,8 +43,8 @@ model Categories {
 }
 
 model Inventory {
-  id        Int       @id @default(autoincrement())
-  productId Int
+id String @id @default(cuid())
+  productId String
   quantity  Int
   location  String
   createdAt DateTime  @default(now())
@@ -55,8 +54,8 @@ model Inventory {
 }
 
 model Orders {
-  id          Int          @id @default(autoincrement())
-  customerId  Int
+id String @id @default(cuid())
+  customerId  String
   totalAmount Float
   status      Status       @default(Pending)
   createdAt   DateTime     @default(now())
@@ -67,9 +66,9 @@ model Orders {
 }
 
 model OrderItems {
-  id        Int       @id @default(autoincrement())
-  orderId   Int
-  productId Int
+id String @id @default(cuid())
+  orderId   String
+  productId String
   quantity  Int
   price     Float
   createdAt DateTime  @default(now())
@@ -80,7 +79,7 @@ model OrderItems {
 }
 
 model Customers {
-  id        Int       @id @default(autoincrement())
+id String @id @default(cuid())
   name      String
   email     String    @unique
   phone     String    @unique
@@ -92,7 +91,7 @@ model Customers {
 }
 
 model Shipments {
-  id Int    @id @default(autoincrement())
+  id String @id @default(cuid())
   customer_name String 
   customer_email String
   createdAt DateTime  @default(now())
