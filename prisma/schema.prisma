@@ -7,9 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Status{
-Pending
-Delivered
+enum Status {
+  Pending
+  Delivered
 }
 
 model Admins {
@@ -22,78 +22,78 @@ model Admins {
 }
 
 model Products {
-  id String @id @default(cuid())
+  id          String       @id @default(cuid())
   description String
   category    String
   price       Float
   photoUrl    String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  categories    Categories @relation(fields: [category],references: [id])
+  categories  Categories   @relation(fields: [category], references: [id])
   inventory   Inventory[]  @relation("ProductInventory")
   orderItems  OrderItems[] @relation("ProductOrderItems")
 }
 
 model Categories {
-id String @id @default(cuid())
+  id        String     @id @default(cuid())
   name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  products Products[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  products  Products[]
 }
 
 model Inventory {
-id String @id @default(cuid())
+  id        String   @id @default(cuid())
   productId String
   quantity  Int
   location  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  product   Products  @relation("ProductInventory", fields: [productId], references: [id])
+  product Products @relation("ProductInventory", fields: [productId], references: [id])
 }
 
 model Orders {
-id String @id @default(cuid())
+  id          String   @id @default(cuid())
   customerId  String
   totalAmount Float
-  status      Status       @default(Pending)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  status      Status   @default(Pending)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  customer    Customers    @relation(fields: [customerId], references: [id])
-  orderItems  OrderItems[]
+  customer   Customers    @relation(fields: [customerId], references: [id])
+  orderItems OrderItems[]
 }
 
 model OrderItems {
-id String @id @default(cuid())
+  id        String   @id @default(cuid())
   orderId   String
   productId String
   quantity  Int
   price     Float
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  order     Orders    @relation(fields: [orderId], references: [id])
-  product   Products  @relation("ProductOrderItems", fields: [productId], references: [id])
+  order   Orders   @relation(fields: [orderId], references: [id])
+  product Products @relation("ProductOrderItems", fields: [productId], references: [id])
 }
 
 model Customers {
-id String @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
-  email     String    @unique
-  phone     String    @unique
+  email     String   @unique
+  phone     String   @unique
   address   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  orders    Orders[]
+  orders Orders[]
 }
 
 model Shipments {
-  id String @id @default(cuid())
-  customer_name String 
+  id             String   @id @default(cuid())
+  customer_name  String
   customer_email String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
