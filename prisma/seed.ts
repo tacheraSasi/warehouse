@@ -48,8 +48,6 @@ export default async function main() {
     data: products
   });
 
-  
-
   // Seed inventory
   const inventoryData = products.map((_, index) => ({
     productId: index + 1,
@@ -62,7 +60,7 @@ export default async function main() {
   });
 
   // Seed customers
-  const customers = Array.from({ length: 10 }, () => ({
+  const customers = Array.from({ length: 20 }, () => ({
     name: faker.person.fullName(),
     email: faker.internet.email(),
     phone: faker.phone.number(),
@@ -72,6 +70,11 @@ export default async function main() {
   await prisma.customers.createMany({
     data: customers
   });
+
+  const shipments = customers.map((customer) => ({
+    customer_name: customer.name,
+    customer_email: customer.email
+  }));
 
   console.log('Seeding completed!');
 }
