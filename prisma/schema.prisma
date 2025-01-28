@@ -96,6 +96,7 @@ model Shipments {
   customer_name  String
   customer_email String
   product_name   String
+  quantity       Int
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

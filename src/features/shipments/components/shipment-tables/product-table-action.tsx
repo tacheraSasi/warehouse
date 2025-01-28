@@ -8,7 +8,7 @@ import {
   useProductTableFilters
 } from './use-product-table-filters';
 
-export default function ProductTableAction() {
+export default function ShipmentTableAction() {
   const {
     categoriesFilter,
     setCategoriesFilter,

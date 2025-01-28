@@ -1,8 +1,6 @@
-import { Product } from '@/constants/data';
-import { fakeshipments } from '@/constants/mock-api';
 import { searchParamsCache } from '@/lib/searchparams';
 import { DataTable as ProductTable } from '@/components/ui/table/data-table';
-import { columns } from './product-tables/columns';
+import { columns } from './shipment-tables/columns';
 import prisma from 'prisma/client';
 
 type ShipmentListingPage = {};
