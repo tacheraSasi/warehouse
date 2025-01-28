@@ -131,8 +131,8 @@ export default function ProductForm({
                         <SelectItem  value={defaultValues.category}>
                           {defaultValues.category}
                         </SelectItem>
-                        {categories.map((category) => (
-                          <SelectItem key={category.id} value={category.name}>
+                        {categories.map((category,i) => (
+                          <SelectItem key={i} value={category.name}>
                             {category.name}
                           </SelectItem>
                         ))}
