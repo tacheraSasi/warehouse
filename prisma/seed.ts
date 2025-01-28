@@ -81,7 +81,7 @@ export default async function main() {
       prisma.orders.create({
         data: {
           customerId: customer.id,
-          totalAmount: faker.finance.amount({ min: 50, max: 1000 }),
+          totalAmount: parseFloat(faker.finance.amount({ min: 50, max: 1000 })),
           status: faker.helpers.arrayElement(['Pending', 'Delivered']),
           createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
           updatedAt: faker.date.recent(),
@@ -103,11 +103,11 @@ export default async function main() {
 
   // Seed Shipments
   await Promise.all(
-    orders.map(async (order) =>
+    orders.map(async (order,i) =>
       prisma.shipments.create({
         data: {
-          customer_name: order.customer.name,
-          customer_email: order.customer.email,
+          customer_name: customers[i].name,
+          customer_email: customers[i].email,
           product_name: faker.helpers.arrayElement(products).name,
           quantity: faker.number.int({ min: 1, max: 10 }),
           createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
