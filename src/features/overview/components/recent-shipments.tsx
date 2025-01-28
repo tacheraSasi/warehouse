@@ -45,11 +45,11 @@ export function RecentShipments({ recentShipments }: RecentShipmentsProps) {
             <p className="text-sm font-medium leading-none">
               {shipment.orderItems[0].product.name}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               {shipment.orderItems[0].product.description}
             </p>
           </div>
-          <div className="ml-auto font-medium">
+          <div className="ml-auto font-medium text-sm">
             +${shipment.orderItems[0].product.price.toFixed(2)}
           </div>
         </div>
