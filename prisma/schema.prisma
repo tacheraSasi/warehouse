@@ -23,6 +23,7 @@ model Admins {
 
 model Products {
   id          String       @id @default(cuid())
+  name        String
   description String
   category    String
   price       Float

@@ -6,20 +6,20 @@ export default async function main() {
   const password = await hashPassword('password');
 
   // Seed admin
-  await prisma.admins.create({
-    data: {
-      name: 'Ekilie',
-      email: 'support@ekilie.com',
-      password: password
-    }
-  });
-  await prisma.admins.create({
-    data: {
-      name: 'Tachera Sasi',
-      email: 'tacherasasi@gmail.com',
-      password: password
-    }
-  });
+  // await prisma.admins.create({
+  //   data: {
+  //     name: 'Ekilie',
+  //     email: 'support@ekilie.com',
+  //     password: password
+  //   }
+  // });
+  // await prisma.admins.create({
+  //   data: {
+  //     name: 'Tachera Sasi',
+  //     email: 'tacherasasi@gmail.com',
+  //     password: password
+  //   }
+  // });
 
   const categories = Array.from({ length: 20 }, (_, index) => ({
     name: faker.commerce.department(),
@@ -35,7 +35,7 @@ export default async function main() {
   const products = Array.from({ length: 20 }, (_, index) => ({
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
-    category: faker.commerce.department(),
+    category: categories[index].name,
     price: parseFloat(faker.commerce.price({ min: 5, max: 500 })),
     photoUrl: `https://api.slingacademy.com/public/sample-products/${
       index + 1
@@ -50,7 +50,7 @@ export default async function main() {
 
   // Seed inventory
   const inventoryData = products.map((_, index) => ({
-    productId: index + 1,
+    productId: (index + 1).toString(),
     quantity: faker.number.int({ min: 10, max: 100 }),
     location: faker.location.city()
   }));
