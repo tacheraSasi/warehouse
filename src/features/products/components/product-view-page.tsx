@@ -11,6 +11,7 @@ export default async function ProductViewPage({
   productId
 }: TProductViewPageProps) {
   let product = null;
+  let categoryArray = null;
   let pageTitle = 'Create New Product';
 
   if (productId !== 'new') {
@@ -18,11 +19,13 @@ export default async function ProductViewPage({
     const data = await prisma.products.findUnique({where: {id: productId}});
     const categories = await prisma.categories.findMany();
     product = data;
+    categoryArray = categories
+    
     if (!product) {
       notFound();
     }
     pageTitle = `Edit Product`;
   }
 
-  return <ProductForm initialData={product} pageTitle={pageTitle} categories={categories} />;
+  return <ProductForm initialData={product} pageTitle={pageTitle} categories={categoryArray} />;
 }

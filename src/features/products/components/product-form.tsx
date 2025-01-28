@@ -128,6 +128,9 @@ export default function ProductForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
+                        <SelectItem  value={defaultValues.category}>
+                          {defaultValues.category}
+                        </SelectItem>
                         {categories.map((category) => (
                           <SelectItem key={category.id} value={category.name}>
                             {category.name}
