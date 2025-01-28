@@ -33,6 +33,13 @@ const ACCEPTED_IMAGE_TYPES = [
   'image/webp'
 ];
 
+interface Category{
+  id:string,
+  name:string,
+  createdAt:Date,
+  updatedAt:Date
+}
+
 const formSchema = z.object({
   image: z
     .any()
@@ -57,10 +64,12 @@ const formSchema = z.object({
 
 export default function ProductForm({
   initialData,
-  pageTitle
+  pageTitle,
+  categories
 }: {
   initialData: Product | null;
   pageTitle: string;
+  categories: Category[];
 }) {
   const defaultValues = {
     name: initialData?.name || '',
@@ -119,13 +128,12 @@ export default function ProductForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value='beauty'>Beauty Products</SelectItem>
-                        <SelectItem value='electronics'>Electronics</SelectItem>
-                        <SelectItem value='clothing'>Clothing</SelectItem>
-                        <SelectItem value='home'>Home & Garden</SelectItem>
-                        <SelectItem value='sports'>
-                          Sports & Outdoors
-                        </SelectItem>
+                        {categories.map((category) => (
+                          <SelectItem key={category.id} value={category.name}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                        
                       </SelectContent>
                     </Select>
                     <FormMessage />

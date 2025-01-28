@@ -16,6 +16,7 @@ export default async function ProductViewPage({
   if (productId !== 'new') {
     // const data = await fakeProducts.getProductById(Number(productId));
     const data = await prisma.products.findUnique({where: {id: productId}});
+    const categories = await prisma.categories.findMany();
     product = data;
     if (!product) {
       notFound();
@@ -23,5 +24,5 @@ export default async function ProductViewPage({
     pageTitle = `Edit Product`;
   }
 
-  return <ProductForm initialData={product} pageTitle={pageTitle} />;
+  return <ProductForm initialData={product} pageTitle={pageTitle} categories={categories} />;
 }
