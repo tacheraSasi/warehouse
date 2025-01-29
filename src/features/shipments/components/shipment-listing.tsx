@@ -1,5 +1,5 @@
 import { searchParamsCache } from '@/lib/searchparams';
-import { DataTable as ProductTable } from '@/components/ui/table/data-table';
+import { DataTable as ShipmentTable } from '@/components/ui/table/data-table';
 import { columns } from './shipment-tables/columns';
 import prisma from 'prisma/client';
 
@@ -24,7 +24,7 @@ export default async function ShipmentListingPage({}: ShipmentListingPage) {
   const totalShipment = await prisma.shipments.count();
 
   return (
-    <ProductTable
+    <ShipmentTable
       columns={columns}
       data={shipments as any}
       totalItems={totalShipment}
