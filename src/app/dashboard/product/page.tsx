@@ -20,18 +20,18 @@ type pageProps = {
   searchParams: SearchParams;
 };
 
-export default async function Page({ searchParams }: pageProps) {
+export default async function Page() {
   // Allow nested RSCs to access the search params (in a type-safe way)
-  searchParamsCache.parse(searchParams);
+  // searchParamsCache.parse(searchParams);
 
   // This key is used for invoke suspense if any of the search params changed (used for filters).
-  const key = serialize({ ...searchParams });
+  // const key = serialize({ ...searchParams });
 
   return (
     <PageContainer>
       <div className='space-y-4'>
         <div className='flex items-start justify-between'>
-          <Heading   
+          <Heading
             title='Products'
             description='Manage products (Server side table functionalities.)'
           />
@@ -45,7 +45,6 @@ export default async function Page({ searchParams }: pageProps) {
         <Separator />
         <ProductTableAction />
         <Suspense
-          key={key}
           fallback={<DataTableSkeleton columnCount={5} rowCount={10} />}
         >
           <ProductListingPage />

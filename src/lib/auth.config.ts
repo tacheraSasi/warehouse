@@ -23,7 +23,7 @@ const authConfig = {
         console.log(user);
         const isPassCorrect: boolean = await comparePassword(
           credentials?.password as string,
-          user.password
+          user?.password as string
         );
         console.log(isPassCorrect);
 

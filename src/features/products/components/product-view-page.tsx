@@ -16,16 +16,22 @@ export default async function ProductViewPage({
 
   if (productId !== 'new') {
     // const data = await fakeProducts.getProductById(Number(productId));
-    const data = await prisma.products.findUnique({where: {id: productId}});
+    const data = await prisma.products.findUnique({ where: { id: productId } });
     const categories = await prisma.categories.findMany();
     product = data;
-    categoryArray = categories
-    
+    categoryArray = categories;
+
     if (!product) {
       notFound();
     }
     pageTitle = `Edit Product`;
   }
 
-  return <ProductForm initialData={product} pageTitle={pageTitle} categories={categoryArray} />;
+  return (
+    <ProductForm
+      initialData={product as any}
+      pageTitle={pageTitle}
+      categories={categoryArray as any}
+    />
+  );
 }
