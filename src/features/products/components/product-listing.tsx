@@ -23,16 +23,16 @@ export default async function ProductListingPage({}: ProductListingPage) {
   // const data = await fakeProducts.getProducts(filters);
   // const totalProducts = data.total_products;
   // const products: Product[] = data.products;
-  
-  const dataFromDb = await prisma.products.findMany()
-  
-  const products = dataFromDb
-  const totalProducts = await prisma.products.count()
+
+  const dataFromDb = await prisma.products.findMany();
+
+  const products = dataFromDb;
+  const totalProducts = await prisma.products.count();
 
   return (
     <ProductTable
       columns={columns}
-      data={products}
+      data={products as any}
       totalItems={totalProducts}
     />
   );

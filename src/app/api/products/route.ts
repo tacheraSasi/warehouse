@@ -8,7 +8,7 @@ const productSchema = z.object({
   description: z.string(),
   category: z.string(),
   price: z.number(),
-  photoUrl: z.string(),
+  photoUrl: z.string()
 });
 
 // GET all products
@@ -16,8 +16,8 @@ export async function GET() {
   try {
     const products = await prisma.products.findMany();
     return NextResponse.json(products, { status: 200 });
-  } catch (err:any) {
-    return NextResponse.json({ error: err.message  }, { status: 500 });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const product = await prisma.products.create({ data });
     return NextResponse.json(product, { status: 201 });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 400 });
+    return NextResponse.json({ error: err }, { status: 400 });
   }
 }
 
@@ -42,10 +42,10 @@ export async function PUT(req: NextRequest) {
 
     const product = await prisma.products.update({
       where: { id },
-      data,
+      data
     });
     return NextResponse.json(product, { status: 200 });
-  } catch (err:any) {
+  } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 400 });
   }
 }
@@ -58,6 +58,6 @@ export async function DELETE(req: NextRequest) {
     await prisma.products.delete({ where: { id } });
     return NextResponse.json({ message: 'Product deleted' }, { status: 200 });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 400 });
+    return NextResponse.json({ error: err }, { status: 400 });
   }
 }
