@@ -8,9 +8,10 @@ export default async function main() {
   // Seed Admins
   await prisma.admins.createMany({
     data: [
-      { name: 'Ekilie', email: 'support@ekilie.com', password },
-      { name: 'Tachera Sasi', email: 'tacherasasi@gmail.com', password },
-    ],
+      { name: 'Revaycolizer', email: 'revay@gmail.com', password }
+      // { name: 'Ekilie', email: 'support@ekilie.com', password },
+      // { name: 'Tachera Sasi', email: 'tacherasasi@gmail.com', password },
+    ]
   });
 
   // Seed Categories
@@ -19,9 +20,12 @@ export default async function main() {
       prisma.categories.create({
         data: {
           name: faker.commerce.department(),
-          createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
-          updatedAt: faker.date.recent(),
-        },
+          createdAt: faker.date.between({
+            from: '2022-01-01',
+            to: '2025-12-31'
+          }),
+          updatedAt: faker.date.recent()
+        }
       })
     )
   );
@@ -36,10 +40,15 @@ export default async function main() {
           description: faker.commerce.productDescription(),
           category: category.id,
           price: parseFloat(faker.commerce.price({ min: 5, max: 500 })),
-          photoUrl: `https://api.slingacademy.com/public/sample-products/${index + 1}.png`,
-          createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
-          updatedAt: faker.date.recent(),
-        },
+          photoUrl: `https://api.slingacademy.com/public/sample-products/${
+            index + 1
+          }.png`,
+          createdAt: faker.date.between({
+            from: '2022-01-01',
+            to: '2025-12-31'
+          }),
+          updatedAt: faker.date.recent()
+        }
       });
     })
   );
@@ -52,9 +61,12 @@ export default async function main() {
           productId: product.id,
           quantity: faker.number.int({ min: 10, max: 100 }),
           location: faker.location.city(),
-          createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
-          updatedAt: faker.date.recent(),
-        },
+          createdAt: faker.date.between({
+            from: '2022-01-01',
+            to: '2025-12-31'
+          }),
+          updatedAt: faker.date.recent()
+        }
       })
     )
   );
@@ -68,9 +80,12 @@ export default async function main() {
           email: faker.internet.email(),
           phone: faker.phone.number(),
           address: faker.location.streetAddress(),
-          createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
-          updatedAt: faker.date.recent(),
-        },
+          createdAt: faker.date.between({
+            from: '2022-01-01',
+            to: '2025-12-31'
+          }),
+          updatedAt: faker.date.recent()
+        }
       })
     )
   );
@@ -83,36 +98,44 @@ export default async function main() {
           customerId: customer.id,
           totalAmount: parseFloat(faker.finance.amount({ min: 50, max: 1000 })),
           status: faker.helpers.arrayElement(['Pending', 'Delivered']),
-          createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
+          createdAt: faker.date.between({
+            from: '2022-01-01',
+            to: '2025-12-31'
+          }),
           updatedAt: faker.date.recent(),
           orderItems: {
-            create: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }).map(() => {
+            create: Array.from({
+              length: faker.number.int({ min: 1, max: 5 })
+            }).map(() => {
               const product = faker.helpers.arrayElement(products);
               const quantity = faker.number.int({ min: 1, max: 10 });
               return {
                 productId: product.id,
                 quantity,
-                price: product.price * quantity,
+                price: product.price * quantity
               };
-            }),
-          },
-        },
+            })
+          }
+        }
       })
     )
   );
 
   // Seed Shipments
   await Promise.all(
-    orders.map(async (order,i) =>
+    orders.map(async (order, i) =>
       prisma.shipments.create({
         data: {
           customer_name: customers[i].name,
           customer_email: customers[i].email,
           product_name: faker.helpers.arrayElement(products).name,
           quantity: faker.number.int({ min: 1, max: 10 }),
-          createdAt: faker.date.between({ from: '2022-01-01', to: '2025-12-31' }),
-          updatedAt: faker.date.recent(),
-        },
+          createdAt: faker.date.between({
+            from: '2022-01-01',
+            to: '2025-12-31'
+          }),
+          updatedAt: faker.date.recent()
+        }
       })
     )
   );
