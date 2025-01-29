@@ -6,13 +6,13 @@ export default async function main() {
   const password = await hashPassword('password');
 
   // Seed Admins
-  await prisma.admins.createMany({
-    data: [
-      { name: 'Revaycolizer', email: 'revay@gmail.com', password }
-      // { name: 'Ekilie', email: 'support@ekilie.com', password },
-      // { name: 'Tachera Sasi', email: 'tacherasasi@gmail.com', password },
-    ]
-  });
+  // await prisma.admins.createMany({
+  //   data: [
+  //     { name: 'Revaycolizer', email: 'revay@gmail.com', password }
+  //     // { name: 'Ekilie', email: 'support@ekilie.com', password },
+  //     // { name: 'Tachera Sasi', email: 'tacherasasi@gmail.com', password },
+  //   ]
+  // });
 
   // Seed Categories
   const categories = await Promise.all(
