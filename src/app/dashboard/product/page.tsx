@@ -20,13 +20,23 @@ type pageProps = {
   searchParams: SearchParams;
 };
 
-export default async function Page() {
+export default async function Page({
+  searchParams
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   // Allow nested RSCs to access the search params (in a type-safe way)
   // searchParamsCache.parse(searchParams);
 
   // This key is used for invoke suspense if any of the search params changed (used for filters).
   // const key = serialize({ ...searchParams });
 
+  const Mypage = (await searchParams)?.page;
+  const Mysearch = (await searchParams)?.search;
+
+  const page = typeof Mypage === 'string' ? parseInt(Mypage, 10) : 1;
+  const search = typeof Mysearch === 'string' ? Mysearch : undefined;
+  const limit: number = 8;
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -47,7 +57,11 @@ export default async function Page() {
         <Suspense
           fallback={<DataTableSkeleton columnCount={5} rowCount={10} />}
         >
-          <ProductListingPage />
+          <ProductListingPage
+            page={page as number}
+            search={search as string}
+            limit={limit}
+          />
         </Suspense>
       </div>
     </PageContainer>

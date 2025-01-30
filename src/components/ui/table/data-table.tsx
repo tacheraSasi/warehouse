@@ -29,6 +29,7 @@ import {
   useReactTable
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { parseAsInteger, useQueryState } from 'nuqs';
 
 interface DataTableProps<TData, TValue> {
@@ -61,7 +62,7 @@ export function DataTable<TData, TValue>({
   };
 
   const pageCount = Math.ceil(totalItems / pageSize);
-
+  const router = useRouter();
   const handlePaginationChange = (
     updaterOrValue:
       | PaginationState
@@ -74,6 +75,7 @@ export function DataTable<TData, TValue>({
 
     setCurrentPage(pagination.pageIndex + 1); // converting zero-based index to one-based
     setPageSize(pagination.pageSize);
+    router.push(`/dashboard/product?${currentPage}`);
   };
 
   const table = useReactTable({
