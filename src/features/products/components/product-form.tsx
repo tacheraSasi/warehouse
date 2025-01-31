@@ -33,11 +33,11 @@ const ACCEPTED_IMAGE_TYPES = [
   'image/webp'
 ];
 
-interface Category{
-  id:string,
-  name:string,
-  createdAt:Date,
-  updatedAt:Date
+interface Category {
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const formSchema = z.object({
@@ -97,7 +97,6 @@ export default function ProductForm({
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-            
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
               <FormField
                 control={form.control}
@@ -128,15 +127,15 @@ export default function ProductForm({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem  value={defaultValues.category}>
+                        <SelectItem value={defaultValues.category}>
                           {defaultValues.category}
                         </SelectItem>
-                        {categories.map((category,i) => (
-                          <SelectItem key={i} value={category.name}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                        
+                        {categories &&
+                          categories.map((category, i) => (
+                            <SelectItem key={i} value={category.name}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

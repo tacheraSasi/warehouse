@@ -14,12 +14,13 @@ export default async function ProductViewPage({
   let categoryArray = null;
   let pageTitle = 'Create New Product';
 
+  const categories = await prisma.categories.findMany();
+  categoryArray = categories;
+
   if (productId !== 'new') {
     // const data = await fakeProducts.getProductById(Number(productId));
     const data = await prisma.products.findUnique({ where: { id: productId } });
-    const categories = await prisma.categories.findMany();
     product = data;
-    categoryArray = categories;
 
     if (!product) {
       notFound();
