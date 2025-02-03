@@ -15,7 +15,8 @@
     "lint:strict": "eslint --max-warnings=0 src",
     "format": "prettier --write .",
     "format:check": "prettier -c -w .",
-    "postinstall": "prisma generate",
+    "postinstall": "npx prisma generate",
+    "vercel-build": "npx prisma generate && next build",
     "prepare": "husky"
   },
   "lint-staged": {
