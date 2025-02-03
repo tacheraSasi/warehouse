@@ -49,7 +49,7 @@ export default function UserAuthForm() {
           callbackUrl
         });
 
-        console.log("The result: ",result)
+        console.log('The result: ', result);
         if (result == null) {
           toast.error('Invalid email or password.');
         } else {
@@ -120,7 +120,7 @@ export default function UserAuthForm() {
           </span>
         </div>
       </div>
-      <GithubSignInButton />
+      {/* <GithubSignInButton /> */}
     </>
   );
 }
